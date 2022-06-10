@@ -5,13 +5,13 @@
 #include "VOneMqttClient.h"
 
 //define device id
-const char* DigitalInput = "c75d02a6-4992-400d-83b4-1799cebf8007";//digital input
-const char* DigitalInput2 = "18dbd736-322d-473b-925d-3d88de9b4b38";//digital input 2
+const char* DigitalInput = "8c08337d-5244-46eb-a84e-e6ce2f798c1a";  //Replace with the deviceID of YOUR first button
+const char* DigitalInput2 = "4eb5fe11-35ad-423b-9be9-658c606daffa"; //Replace with the deviceID of YOUR second button
 
 //Used Pins
 const int buttonPin = 22;
-const int buttonPin2 = 19;
-const int ledPin = 23;
+const int buttonPin2 = 23;
+const int ledPin = 32;
 
 int count1 = 0;
 int count2 = 0;
@@ -89,7 +89,7 @@ void loop() {
       digitalWrite(ledPin, LOW);
     }
 
-    voneClient.publishTelemetryData(DigitalInput, "digitalInput1", count1);
+    voneClient.publishTelemetryData(DigitalInput, "Button1", count1);
 
     if (digitalInputValue2 == HIGH)
     {
@@ -103,6 +103,6 @@ void loop() {
       digitalWrite(ledPin, LOW);
     }
 
-    voneClient.publishTelemetryData(DigitalInput2, "digitalInput2", count2);
+    voneClient.publishTelemetryData(DigitalInput2, "Button2", count2);
   }
 }
