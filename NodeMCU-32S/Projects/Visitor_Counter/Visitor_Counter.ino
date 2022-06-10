@@ -1,20 +1,20 @@
 /*
-  ESP32 publish telemetry data to VOne Cloud (Mailbox Notifications)
+  ESP32 publish telemetry data to VOne Cloud (Visitor Counter)
 */
 
 #include "VOneMqttClient.h"
 #include <Servo.h>
 
 //define device id
-const char* InfraredSensor = "bf28a317-0245-4ad2-b26e-443f43cbc4a2";  //infrared sensor
-const char* ServoMotor = "e5c08526-7a1c-43ad-86ea-cfdc021836ba"; //servo motor
+const char* InfraredSensor = "6d81b821-59b4-4e88-8096-47bc40eb8f4d";  //Replace with the deviceID of YOUR infrared sensor
+const char* ServoMotor = "1fc35421-fde1-4589-b5d0-b020db545d09";      //Replace with the deviceID of YOUR servo motor
 
 //Used Pins
-const int InfraredPin1 = 36;
-const int InfraredPin2 = 39;
-const int ledPin1 = 22;
-const int ledPin2 = 23;
-const int servoPin = 13;
+const int InfraredPin1 = 21;
+const int InfraredPin2 = 35;
+const int ledPin1 = 32;
+const int ledPin2 = 33;
+const int servoPin = 27;
 
 unsigned long lastMillis = 0;
 volatile int count1 = 0;
@@ -139,7 +139,7 @@ void loop() {
 
   if (!voneClient.connected()) {
     voneClient.reconnect();
-    String errorMsg = "PIRsensor Fail";
+    String errorMsg = "Infrared sensor Fail";
     voneClient.publishDeviceStatusEvent(InfraredSensor, true);
   }
   voneClient.loop();
@@ -147,6 +147,6 @@ void loop() {
   unsigned long cur = millis();
   if (cur - lastMsgTime > INTERVAL) {
     lastMsgTime = cur;
-    voneClient.publishTelemetryData(InfraredSensor, "Infrared", count1);
+    voneClient.publishTelemetryData(InfraredSensor, "Obstacle", count1);
   }
 }
