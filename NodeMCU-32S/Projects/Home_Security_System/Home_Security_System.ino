@@ -1,18 +1,18 @@
 /*
-  ESP32 publish telemetry data to VOne Cloud (Push_Button)
+  ESP32 publish telemetry data to VOne Cloud (Home Security System)
 */
 
 #include "VOneMqttClient.h"
 
 //define device id
-const char* DigitalInput = "c75d02a6-4992-400d-83b4-1799cebf8007";//digital input
-const char* LEDLight = "4d785918-9050-4e91-8567-b4b96533d671"; //led light
-const char* PIRsensor = "9276252b-8f4a-4235-92aa-718140d7a69b";  //pir sensor
+const char* DigitalInput = "8c08337d-5244-46eb-a84e-e6ce2f798c1a";  //Insert
+const char* LEDLight = "1cd90ad1-0128-4bcc-b365-a6e29023e896";      //led light
+const char* PIRsensor = "123914bb-debc-4490-b673-470b4bc73c44";     //pir sensor
 
 //Used Pins
-const int buttonPin = 22;
-const int ledPin = 23;
-const int motionSensor = 36;
+const int buttonPin = 23;
+const int ledPin = 33;
+const int motionSensor = 22;
 bool ledflag = 0;
 
 //input sensor
@@ -105,7 +105,7 @@ void setup() {
   voneClient.registerActuatorCallback(triggerActuator_callback);
 
   //sensor
-  pinMode(buttonPin, INPUT);
+  pinMode(buttonPin, INPUT_PULLUP);
   pinMode(ledPin, OUTPUT);
   pinMode(motionSensor, INPUT);
   digitalWrite(ledPin, LOW);
@@ -131,12 +131,17 @@ void loop() {
     //Publish telemetry data
     int digitalInputValue = digitalRead(buttonPin);
     int PIRvalue = digitalRead(motionSensor);
-    if (digitalInputValue == HIGH)
+    if (digitalInputValue == LOW)
     {
+      digitalInputValue = 1;
       digitalWrite(ledPin, HIGH);
     }
+    else
+    {
+      digitalInputValue = 0;
+    }
 
-    voneClient.publishTelemetryData(DigitalInput, "digitalInput1", digitalInputValue);
+    voneClient.publishTelemetryData(DigitalInput, "Button1", digitalInputValue);
 
     if (PIRvalue == HIGH)
     {
