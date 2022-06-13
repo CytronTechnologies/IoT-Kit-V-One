@@ -5,12 +5,12 @@
 #include "VOneMqttClient.h"
 
 //define device id
-const char* InfraredSensor = "bf28a317-0245-4ad2-b26e-443f43cbc4a2";  //infrared sensor
+const char* InfraredSensor = "6d81b821-59b4-4e88-8096-47bc40eb8f4d";  //infrared sensor
 
 //Used Pins
-const int buttonPin = 22;
-const int InfraredPin = 36;
-const int ledPin = 23;
+const int buttonPin = 23;
+const int InfraredPin = 22;
+const int ledPin = 32;
 
 int count1 = 0;
 
@@ -50,7 +50,7 @@ void setup() {
   voneClient.setup();
 
   //sensor
-  pinMode(buttonPin, INPUT);
+  pinMode(buttonPin, INPUT_PULLUP);
   pinMode(ledPin, OUTPUT);
   pinMode(InfraredPin, INPUT_PULLUP);
   digitalWrite(ledPin, LOW);
@@ -80,7 +80,7 @@ void loop() {
       count1++;
     }
 
-    if (digitalInputValue == HIGH)
+    if (digitalInputValue == LOW)
     {
       if (count1)
       {
@@ -97,6 +97,6 @@ void loop() {
       digitalWrite(ledPin, LOW);
     }
 
-    voneClient.publishTelemetryData(InfraredSensor, "Infrared", count1);
+    voneClient.publishTelemetryData(InfraredSensor, "Obstacle", count1);
   }
 }
