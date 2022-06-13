@@ -5,7 +5,7 @@
 #include "VOneMqttClient.h"
 
 //define device id
-const char* InfraredSensor = "6d81b821-59b4-4e88-8096-47bc40eb8f4d";  //infrared sensor
+const char* InfraredSensor = "6d81b821-59b4-4e88-8096-47bc40eb8f4d";  //Replace this with YOUR deviceID for the infrared sensor
 
 //Used Pins
 const int buttonPin = 23;
