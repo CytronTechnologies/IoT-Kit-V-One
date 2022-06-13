@@ -5,9 +5,9 @@
 #include "VOneMqttClient.h"
 
 //define device id
-const char* DigitalInput = "8c08337d-5244-46eb-a84e-e6ce2f798c1a";  //Insert
-const char* LEDLight = "1cd90ad1-0128-4bcc-b365-a6e29023e896";      //led light
-const char* PIRsensor = "123914bb-debc-4490-b673-470b4bc73c44";     //pir sensor
+const char* DigitalInput = "8c08337d-5244-46eb-a84e-e6ce2f798c1a";  //Replace with the deviceID of YOUR push button
+const char* LEDLight = "1cd90ad1-0128-4bcc-b365-a6e29023e896";      //Replace with the deviceID of YOUR first LED
+const char* PIRsensor = "123914bb-debc-4490-b673-470b4bc73c44";     //Replace with the deviceID of YOUR PIR sensor
 
 //Used Pins
 const int buttonPin = 23;
