@@ -1,28 +1,14 @@
 /*
-ESP32 publish telemetry data to VOne Cloud and subcribe to execute controller
+  ESP32 publish telemetry data to VOne Cloud (Baby Monitoring)
 */
 
 #include "VOneMqttClient.h"
 
-#define timeSeconds 3
-
 //define device id
-const char* PIRsensor = "9276252b-8f4a-4235-92aa-718140d7a69b";  //pir sensor
+const char* PIRsensor = "123914bb-debc-4490-b673-470b4bc73c44";  //Replace with YOUR deviceID for the PIR sensor
 
 //Used Pins
-const int motionSensor = 27;
-
-//input sensor
-// Timer: Auxiliary variables
-unsigned long now = millis();
-unsigned long lastTrigger = 0;
-boolean startTimer = false;
-
-// Checks if motion was detected, sets LED HIGH and starts a timer
-void IRAM_ATTR detectsMovement() {
-  startTimer = true;
-  lastTrigger = millis();
-}
+const int motionSensor = 22;
 
 //Create an instance of VOneMqttClient
 VOneMqttClient voneClient;
@@ -45,23 +31,20 @@ void setup_wifi() {
     delay(500);
     Serial.print(".");
   }
-  
+
   Serial.println("");
   Serial.println("WiFi connected");
   Serial.println("IP address: ");
   Serial.println(WiFi.localIP());
 }
 
-void setup() {  
-  
-  setup_wifi();   
+void setup() {
+
+  setup_wifi();
   voneClient.setup();
-  
+
   //sensor
-    // PIR Motion Sensor mode INPUT_PULLUP
   pinMode(motionSensor, INPUT);
-  // Set motionSensor pin as interrupt, assign interrupt function and set RISING mode
-  attachInterrupt(digitalPinToInterrupt(motionSensor), detectsMovement, RISING);
 }
 
 void loop() {
@@ -69,7 +52,7 @@ void loop() {
   if (!voneClient.connected()) {
     voneClient.reconnect();
     String errorMsg = "PIRsensor Fail";
-    voneClient.publishDeviceStatusEvent(PIRsensor,true);
+    voneClient.publishDeviceStatusEvent(PIRsensor, true);
   }
   voneClient.loop();
 
@@ -77,13 +60,9 @@ void loop() {
   if (cur - lastMsgTime > INTERVAL) {
     lastMsgTime = cur;
 
-      // Current time
-  now = millis();
-  // Turn off the LED after the number of seconds defined in the timeSeconds variable
-  if(startTimer && (now - lastTrigger > (timeSeconds*1000))) {
-    startTimer = false;
-  }
-    voneClient.publishTelemetryData(PIRsensor,"Motion", startTimer);
-       
+    int movementTrigger = digitalRead(motionSensor);
+
+    voneClient.publishTelemetryData(PIRsensor, "Motion", movementTrigger);
+
   }
 }
