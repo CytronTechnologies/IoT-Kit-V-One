@@ -1,29 +1,29 @@
 /*
-  ESP32 publish telemetry data to VOne Cloud (DHT22 sensor)
+  ESP32 publish telemetry data to VOne Cloud (Agriculture)
 */
 
 #include "VOneMqttClient.h"
 #include "DHT.h"
 
 int MinMoistureValue = 4095;
-int MaxMoistureValue = 2100;
+int MaxMoistureValue = 1800;
 int MinMoisture = 0;
 int MaxMoisture = 100;
 int Moisture = 0;
 
 //define device id
-const char* DHT22Sensor = "3f831071-fefc-412c-bed6-15d8bbdb32bc"; //dht22
-const char* RainSensor = "464b7d12-27ca-45c6-858a-8d619dff879b";//rain sensor
-const char* MoistureSensor = "ca4b26fd-9fa8-4e8b-aa7c-7a2a2d376057"; //moisture sensor
+const char* DHT11Sensor = "29099b40-50a8-457a-865f-5c120863cb15";     //Replace with YOUR deviceID for the DHT11 sensor
+const char* RainSensor = "0896fd46-0daa-48d6-afe7-13f5c20ee425";      //Replace with YOUR deviceID for the rain sensor
+const char* MoistureSensor = "b9e92080-057c-4cd5-b88c-3797cabbeb9d";  //Replace with YOUR deviceID for the moisture sensor
 
 //Used Pins
-const int dht22Pin = 2;
-const int rainPin = 26;
+const int dht11Pin = 22;
+const int rainPin = 35;
 const int moisturePin = 34;
 
 //input sensor
-#define DHTTYPE DHT22 // DHT 22 (AM2302), AM2321
-DHT dht(dht22Pin, DHTTYPE);
+#define DHTTYPE DHT11
+DHT dht(dht11Pin, DHTTYPE);
 
 //Create an instance of VOneMqttClient
 VOneMqttClient voneClient;
@@ -68,7 +68,7 @@ void loop() {
   if (!voneClient.connected()) {
     voneClient.reconnect();
     String errorMsg = "DHTSensor Fail";
-    voneClient.publishDeviceStatusEvent(DHT22Sensor, true);
+    voneClient.publishDeviceStatusEvent(DHT11Sensor, true);
     voneClient.publishDeviceStatusEvent(RainSensor, true);
     voneClient.publishDeviceStatusEvent(MoistureSensor, true);
   }
@@ -83,9 +83,9 @@ void loop() {
     float t = dht.readTemperature();
 
     JSONVar payloadObject;
-    payloadObject["humidity"] = h;
-    payloadObject["temperature"] = t;
-    voneClient.publishTelemetryData(DHT22Sensor, payloadObject);
+    payloadObject["Humidity"] = h;
+    payloadObject["Temperature"] = t;
+    voneClient.publishTelemetryData(DHT11Sensor, payloadObject);
 
     //Sample sensor fail message
     //String errorMsg = "DHTSensor Fail";
@@ -98,6 +98,6 @@ void loop() {
     //Publish telemetry data 3
     int sensorValue = analogRead(moisturePin);
     Moisture = map(sensorValue, MinMoistureValue, MaxMoistureValue, MinMoisture, MaxMoisture);
-    voneClient.publishTelemetryData(MoistureSensor, "moisture", Moisture);
+    voneClient.publishTelemetryData(MoistureSensor, "Soil moisture", Moisture);
   }
 }
