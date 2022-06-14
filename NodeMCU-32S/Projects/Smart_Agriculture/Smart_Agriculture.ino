@@ -1,12 +1,12 @@
 /*
-  ESP32 publish telemetry data to VOne Cloud and subcribe to execute controller (servo)
+  ESP32 publish telemetry data to VOne Cloud (Smart Agriculture)
 */
 
 #include "VOneMqttClient.h"
 #include <Servo.h>
 
 int MinMoistureValue = 4095;
-int MaxMoistureValue = 1500;
+int MaxMoistureValue = 1600;
 int MinMoisture = 0;
 int MaxMoisture = 100;
 int Moisture = 0;
@@ -18,12 +18,12 @@ int MaxDepth = 100;
 int depth = 0;
 
 //define device id
-const char* ServoMotor = "e5c08526-7a1c-43ad-86ea-cfdc021836ba"; //servo motor
-const char* MoistureSensor = "ca4b26fd-9fa8-4e8b-aa7c-7a2a2d376057"; //moisture sensor
-const char* WaterLevel = "19dad3ae-2b27-4929-b766-d41e6ce8699e"; //Water Level sensor
+const char* ServoMotor = "7b9ad8f7-dc0f-4979-9e0d-87a6cab8ff83";      //Replace this with YOUR deviceID for the servo
+const char* MoistureSensor = "b9e92080-057c-4cd5-b88c-3797cabbeb9d";  //Replace this with YOUR deviceID for the moisture sensor
+const char* WaterLevel = "351eebb8-4b04-486b-a16e-8775cf353a28";      //Replace this with YOUR deviceID for the water level sensor
 
 //Used Pins
-const int servoPin = 13;
+const int servoPin = 32;
 const int moisturePin = 34;
 const int depthPin = 35;
 
@@ -127,7 +127,7 @@ void loop() {
     //Publish telemtry data
     int sensorValue = analogRead(moisturePin);
     Moisture = map(sensorValue, MinMoistureValue, MaxMoistureValue, MinMoisture, MaxMoisture);
-    voneClient.publishTelemetryData(MoistureSensor, "moisture", Moisture);
+    voneClient.publishTelemetryData(MoistureSensor, "Soil moisture", Moisture);
 
     //Publish telemtry data2
     int sensorValue2 = analogRead(depthPin);
