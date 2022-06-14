@@ -1,17 +1,17 @@
 /*
-  ESP32 publish telemetry data to VOne Cloud and subcribe to execute controller (servo)
+  ESP32 publish telemetry data to VOne Cloud (Pet Feeder)
 */
 
 #include "VOneMqttClient.h"
 #include <Servo.h>
 
 //define device id
-const char* ServoMotor = "e5c08526-7a1c-43ad-86ea-cfdc021836ba"; //servo motor
-const char* InfraredSensor = "bf28a317-0245-4ad2-b26e-443f43cbc4a2";  //infrared
+const char* ServoMotor = "7b9ad8f7-dc0f-4979-9e0d-87a6cab8ff83";      //Replace with YOUR deviceID for the servo
+const char* InfraredSensor = "6d81b821-59b4-4e88-8096-47bc40eb8f4d";  //Replace with YOUR deviceID for the infrared sensor
 
 //Used Pins
-const int servoPin = 13;
-const int InfraredPin = 36;
+const int servoPin = 32;
+const int InfraredPin = 35;
 
 //Output
 Servo Myservo;
@@ -111,7 +111,7 @@ void loop() {
     lastMsgTime = cur;
 
     //Publish telemetry data
-    int InfraredVal = !digitalRead(36);
-    voneClient.publishTelemetryData(InfraredSensor, "Infrared", InfraredVal);
+    int InfraredVal = !digitalRead(InfraredPin);
+    voneClient.publishTelemetryData(InfraredSensor, "Obstacle", InfraredVal);
   }
 }
