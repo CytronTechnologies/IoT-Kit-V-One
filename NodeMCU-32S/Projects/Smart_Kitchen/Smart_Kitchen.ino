@@ -1,17 +1,27 @@
 /*
-  ESP32 publish telemetry data to VOne Cloud and subcribe to relay
+  ESP32 publish telemetry data to VOne Cloud (Smart Kitchen)
 */
 
 #include "VOneMqttClient.h"
 #include <Servo.h>
+#include "DHT.h"
+float gasValue;
 
 //define device id
-const char* Relay = "669d4dbe-b4a1-40f6-bc6a-5311dac6e7fb"; //relay
-const char* ServoMotor = "e5c08526-7a1c-43ad-86ea-cfdc021836ba"; //servo motor
+const char* Relay = "804eb6ba-09c9-43c5-a58e-37a81d619eb0";        //Replace this with YOUR deviceID for the relay
+const char* ServoMotor = "7b9ad8f7-dc0f-4979-9e0d-87a6cab8ff83";   //Replace this with YOUR deviceID for the servo
+const char* MQ2sensor = "ed7f6ce9-3bd2-4f6d-8dae-6d060f392c0f";    //Replace this with YOUR deviceID for the MQ2 sensor
+const char* DHT11Sensor = "29099b40-50a8-457a-865f-5c120863cb15";  //Replace this with YOUR deviceID for the DHT11 sensor
 
 //Used Pins
-const int relayPin = 21;
-const int servoPin = 13;
+const int relayPin = 33;
+const int servoPin = 32;
+const int MQ2pin = 35;
+const int dht11Pin = 22;
+
+//input sensor
+#define DHTTYPE DHT11
+DHT dht(dht11Pin, DHTTYPE);
 
 //Output
 Servo Myservo;
@@ -119,6 +129,11 @@ void setup() {
   setup_wifi();
   voneClient.setup();
   voneClient.registerActuatorCallback(triggerActuator_callback);
+  Serial.println("Gas sensor warming up!");
+  delay(20000); // allow the MQ-2 to warm up
+
+  //sensor
+  dht.begin();
 
   //actuator
   pinMode(relayPin, OUTPUT);
@@ -130,6 +145,9 @@ void loop() {
 
   if (!voneClient.connected()) {
     voneClient.reconnect();
+    String errorMsg = "Sensor Fail";
+    voneClient.publishDeviceStatusEvent(MQ2sensor, true);
+    voneClient.publishDeviceStatusEvent(DHT11Sensor, true);
   }
   voneClient.loop();
 
@@ -137,5 +155,17 @@ void loop() {
   if (cur - lastMsgTime > INTERVAL) {
     lastMsgTime = cur;
 
+    //Publish telemtry data
+    gasValue = analogRead(MQ2pin);
+    voneClient.publishTelemetryData(MQ2sensor, "Gas detector", gasValue);
+
+    //Publish telemetry data 2
+    float h = dht.readHumidity();
+    float t = dht.readTemperature();
+
+    JSONVar payloadObject;
+    payloadObject["Humidity"] = h;
+    payloadObject["Temperature"] = t;
+    voneClient.publishTelemetryData(DHT11Sensor, payloadObject);
   }
 }
