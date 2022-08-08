@@ -65,7 +65,7 @@ void loop() {
     lastMsgTime = cur;
 
     //Publish telemtry data
-    int sensorValue = analogRead(34);
+    int sensorValue = depthPin;
     depth = map(sensorValue, MinDepthValue, MaxDepthValue, MinDepth, MaxDepth);
     voneClient.publishTelemetryData(WaterLevel, "Depth", depth);
   }
