@@ -5,10 +5,24 @@
 #include "VOneMqttClient.h"
 
 //define device id
-const char* PIRsensor = "123914bb-debc-4490-b673-470b4bc73c44";  //Replace with YOUR deviceID for the PIR sensor
+const char* PIRsensor = "bda7cc3c-84fb-4731-b333-8c3c32c4a6b6";  //Replace with YOUR deviceID for the PIR sensor
 
 //Used Pins
 const int motionSensor = 22;
+
+#define timeSeconds 3
+
+//input sensor
+// Timer: Auxiliary variables
+unsigned long now = millis();
+unsigned long lastTrigger = 0;
+boolean startTimer = false;
+
+// Checks if motion was detected, sets LED HIGH and starts a timer
+void IRAM_ATTR detectsMovement() {
+  startTimer = true;
+  lastTrigger = millis();
+}
 
 //Create an instance of VOneMqttClient
 VOneMqttClient voneClient;
@@ -45,6 +59,7 @@ void setup() {
 
   //sensor
   pinMode(motionSensor, INPUT);
+  attachInterrupt(digitalPinToInterrupt(motionSensor), detectsMovement, RISING);
 }
 
 void loop() {
@@ -60,9 +75,13 @@ void loop() {
   if (cur - lastMsgTime > INTERVAL) {
     lastMsgTime = cur;
 
-    int movementTrigger = digitalRead(motionSensor);
+    now = millis();
+    // Turn off the LED after the number of seconds defined in the timeSeconds variable
+    if(startTimer && (now - lastTrigger > (timeSeconds*1000))) {
+      startTimer = false;
+    }
 
-    voneClient.publishTelemetryData(PIRsensor, "Motion", movementTrigger);
+    voneClient.publishTelemetryData(PIRsensor, "Motion", startTimer);
 
   }
 }
