@@ -3,7 +3,7 @@
 */
 
 #include "VOneMqttClient.h"
-#include <Servo.h>
+#include <ESP32Servo.h>
 
 int MinMoistureValue = 4095;
 int MaxMoistureValue = 1600;
