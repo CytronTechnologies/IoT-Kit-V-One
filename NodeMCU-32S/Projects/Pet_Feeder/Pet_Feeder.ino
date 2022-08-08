@@ -3,7 +3,7 @@
 */
 
 #include "VOneMqttClient.h"
-#include <Servo.h>
+#include <ESP32Servo.h>
 
 //define device id
 const char* ServoMotor = "7b9ad8f7-dc0f-4979-9e0d-87a6cab8ff83";      //Replace with YOUR deviceID for the servo
