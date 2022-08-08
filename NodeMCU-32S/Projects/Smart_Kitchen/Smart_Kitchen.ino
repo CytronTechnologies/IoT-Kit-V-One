@@ -3,7 +3,7 @@
 */
 
 #include "VOneMqttClient.h"
-#include <Servo.h>
+#include <ESP32Servo.h>
 #include "DHT.h"
 float gasValue;
 
