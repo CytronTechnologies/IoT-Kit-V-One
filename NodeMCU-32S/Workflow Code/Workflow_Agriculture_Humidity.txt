@@ -7,8 +7,8 @@ function main(parameter){
     threshold = 50;
     
         if(obj.humd < threshold || obj.humd == 'None' ){
-            msgbody='<p>The current humidity value '+obj.humd+' is over threshold, the reading is more than '+threshold+'.</p><br>';
-            output[1]="[Warning] Humidity Reading over Threshold ";//to subject
+            msgbody='<p>The current humidity value '+obj.humd+' is below threshold, the reading is less than '+threshold+'.</p><br>';
+            output[1]="[Warning] Humidity Reading below Threshold ";//to subject
             output[2]=msgbody;//to template
             output[3]=2;//to data
             
