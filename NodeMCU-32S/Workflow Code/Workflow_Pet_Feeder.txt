@@ -6,7 +6,7 @@ people = obj[arrlgt]["Obstacle"]
 threshold = 1
 
 if int(people) < threshold:
-    msgbody='<p>Your cat is hungry. Please open the cat feeder.</p><br>'
+    msgbody='<p>Food container is empty. Please refill the cat food.</p><br>'
     output[1]="[Notification] Refill Cat Food "
     output[2]=msgbody
     output[3]=2
