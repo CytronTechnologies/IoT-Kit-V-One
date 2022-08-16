@@ -8,10 +8,10 @@
 float gasValue;
 
 //define device id
-const char* Relay = "804eb6ba-09c9-43c5-a58e-37a81d619eb0";        //Replace this with YOUR deviceID for the relay
-const char* ServoMotor = "7b9ad8f7-dc0f-4979-9e0d-87a6cab8ff83";   //Replace this with YOUR deviceID for the servo
-const char* MQ2sensor = "ed7f6ce9-3bd2-4f6d-8dae-6d060f392c0f";    //Replace this with YOUR deviceID for the MQ2 sensor
-const char* DHT11Sensor = "29099b40-50a8-457a-865f-5c120863cb15";  //Replace this with YOUR deviceID for the DHT11 sensor
+const char* Relay = "30f2294d-e7f1-4808-ba80-fbaecbb7885c";        //Replace this with YOUR deviceID for the relay
+const char* ServoMotor = "d33bdf13-4595-4f04-b561-0b743238f25e";   //Replace this with YOUR deviceID for the servo
+const char* MQ2sensor = "b2d5d153-6ca2-4fde-82fa-6ee72a38d54a";    //Replace this with YOUR deviceID for the MQ2 sensor
+const char* DHT11Sensor = "f6bacd80-ebdb-4c87-b166-c24ab9e30973";  //Replace this with YOUR deviceID for the DHT11 sensor
 
 //Used Pins
 const int relayPin = 33;
@@ -67,6 +67,33 @@ void triggerActuator_callback(const char* actuatorDeviceId, const char* actuator
   JSONVar commandObjct = JSON.parse(actuatorCommand);
   JSONVar keys = commandObjct.keys();
 
+  if (String(actuatorDeviceId) == ServoMotor)
+  {
+    //{"servo":90}
+    String key = "";
+    JSONVar commandValue = "";
+    for (int i = 0; i < keys.length(); i++) {
+      key = (const char* )keys[i];
+      commandValue = commandObjct[keys[i]];
+
+    }
+    Serial.print("Key : ");
+    Serial.println(key.c_str());
+    Serial.print("value : ");
+    Serial.println(commandValue);
+
+    int angle = (int)commandValue;
+    Myservo.write(angle);
+    voneClient.publishActuatorStatusEvent(actuatorDeviceId, actuatorCommand, errorMsg.c_str(), true);//publish actuator status
+  }
+  else
+  {
+    Serial.print(" No actuator found : ");
+    Serial.println(actuatorDeviceId);
+    errorMsg = "No actuator found";
+    voneClient.publishActuatorStatusEvent(actuatorDeviceId, actuatorCommand, errorMsg.c_str(), false);//publish actuator status
+  }
+
   if (String(actuatorDeviceId) == Relay)
   {
     //{"LEDLight":false}
@@ -94,33 +121,6 @@ void triggerActuator_callback(const char* actuatorDeviceId, const char* actuator
     //Sample publish actuator fail status
     //errorMsg = "LED unable to light up.";
     //voneClient.publishActuatorStatusEvent(actuatorDeviceId, actuatorCommand, errorMsg.c_str(), false);
-  }
-
-  if (String(actuatorDeviceId) == ServoMotor)
-  {
-    //{"servo":90}
-    String key = "";
-    JSONVar commandValue = "";
-    for (int i = 0; i < keys.length(); i++) {
-      key = (const char* )keys[i];
-      commandValue = commandObjct[keys[i]];
-
-    }
-    Serial.print("Key : ");
-    Serial.println(key.c_str());
-    Serial.print("value : ");
-    Serial.println(commandValue);
-
-    int angle = (int)commandValue;
-    Myservo.write(angle);
-    voneClient.publishActuatorStatusEvent(actuatorDeviceId, actuatorCommand, errorMsg.c_str(), true);//publish actuator status
-  }
-  else
-  {
-    Serial.print(" No actuator found : ");
-    Serial.println(actuatorDeviceId);
-    errorMsg = "No actuator found";
-    voneClient.publishActuatorStatusEvent(actuatorDeviceId, actuatorCommand, errorMsg.c_str(), false);//publish actuator status
   }
 }
 
