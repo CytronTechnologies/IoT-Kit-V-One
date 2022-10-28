@@ -1,5 +1,5 @@
 /*
-ESP32 publish telemetry data to VOne Cloud (DHT22 sensor)
+ESP32 publish telemetry data to VOne Cloud (DHT11 sensor)
 */
 
 #include "VOneMqttClient.h"
