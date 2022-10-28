@@ -1,5 +1,5 @@
 /*
-  ESP32 publish telemetry data to VOne Cloud
+  ESP32 publish telemetry data to VOne Cloud (MQ2 Sensor)
 */
 
 #include "VOneMqttClient.h"
@@ -7,7 +7,7 @@
 float gasValue;
 
 //define device id
-const char* MQ2sensor = "5927205f-4421-46e8-a828-0a03f443799d"; //MQ2 sensor
+const char* MQ2sensor = "5927205f-4421-46e8-a828-0a03f443799d"; //Replace this with YOUR deviceID for the MQ2 sensorr
 
 //Used Pins
 const int MQ2pin = 34;
