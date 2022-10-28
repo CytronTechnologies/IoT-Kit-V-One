@@ -1,5 +1,5 @@
 /*
-  ESP32 publish telemetry data to VOne Cloud
+  ESP32 publish telemetry data to VOne Cloud (Water Level Sensor)
 */
 
 #include "VOneMqttClient.h"
@@ -11,7 +11,7 @@ int MaxDepth = 45;
 int depth = 0;
 
 //define device id
-const char* WaterLevel = "19dad3ae-2b27-4929-b766-d41e6ce8699e"; //Water Level sensor
+const char* WaterLevel = "19dad3ae-2b27-4929-b766-d41e6ce8699e";            //Replace this with YOUR deviceID for the water level sensor
 
 //Used Pins
 const int depthPin = 35;
