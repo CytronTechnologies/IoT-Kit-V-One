@@ -5,7 +5,7 @@ ESP32 publish telemetry data to VOne Cloud (Push_Button)
 #include "VOneMqttClient.h"
 
 //define device id
-const char* DigitalInput = "c75d02a6-4992-400d-83b4-1799cebf8007";//digital input
+const char* DigitalInput = "c75d02a6-4992-400d-83b4-1799cebf8007";      //Replace with the deviceID of YOUR push button
 
 //Used Pins
 const int buttonPin = 22;
@@ -71,7 +71,7 @@ void loop() {
     {
        digitalInputValue = 1;
     }    
-     voneClient.publishTelemetryData(DigitalInput,"digitalInput1", digitalInputValue);
+     voneClient.publishTelemetryData(DigitalInput, "Button1", digitalInputValue);
        
   }
 }
