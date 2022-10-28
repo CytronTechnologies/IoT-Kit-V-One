@@ -1,3 +1,7 @@
+/*
+  ESP32 publish telemetry data to VOne Cloud (Smart Bedroom)
+*/
+
 #include "VOneMqttClient.h"
 
 //define device id
