@@ -7,14 +7,14 @@ ESP32 publish telemetry data to VOne Cloud (DHT22 sensor)
 
 
 //define device id
-const char* DHT22Sensor = "3f831071-fefc-412c-bed6-15d8bbdb32bc"; //dht22
+const char* DHT11Sensor = "3f831071-fefc-412c-bed6-15d8bbdb32bc"; //Replace with YOUR deviceID for the DHT11 sensor
 
 //Used Pins
-const int dht22Pin = 2; //GPIO2. D4
+const int dht11Pin = 2;
 
 //input sensor
-#define DHTTYPE DHT22 // DHT 22 (AM2302), AM2321
-DHT dht(dht22Pin, DHTTYPE);
+#define DHTTYPE DHT11
+DHT dht(dht11Pin, DHTTYPE);
 
 //Create an instance of VOneMqttClient
 VOneMqttClient voneClient;
@@ -58,7 +58,7 @@ void loop() {
   if (!voneClient.connected()) {
     voneClient.reconnect();
     String errorMsg = "DHTSensor Fail";
-    voneClient.publishDeviceStatusEvent(DHT22Sensor, true);
+    voneClient.publishDeviceStatusEvent(DHT11Sensor, true);
   }
   voneClient.loop();
 
@@ -73,7 +73,7 @@ void loop() {
     JSONVar payloadObject;    
     payloadObject["humidity"] = h;
     payloadObject["temperature"] = t;
-    voneClient.publishTelemetryData(DHT22Sensor, payloadObject);
+    voneClient.publishTelemetryData(DHT11Sensor, payloadObject);
 
     //Sample sensor fail message
     //String errorMsg = "DHTSensor Fail";
