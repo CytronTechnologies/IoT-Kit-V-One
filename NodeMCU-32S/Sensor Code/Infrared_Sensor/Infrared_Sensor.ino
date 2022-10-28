@@ -5,7 +5,7 @@
 #include "VOneMqttClient.h"
 
 //define device id
-const char* InfraredSensor = "bf28a317-0245-4ad2-b26e-443f43cbc4a2";  //infrared sensor
+const char* InfraredSensor = "bf28a317-0245-4ad2-b26e-443f43cbc4a2";  //Replace with the deviceID of YOUR infrared sensor
 
 //Used Pins
 const int InfraredPin = 36;
@@ -62,8 +62,8 @@ void loop() {
     lastMsgTime = cur;
 
     //Publish telemetry data
-    int InfraredVal = !digitalRead(36);
-    voneClient.publishTelemetryData(InfraredSensor, "Infrared", InfraredVal);
+    int InfraredVal = !digitalRead(InfraredPin);
+    voneClient.publishTelemetryData(InfraredSensor, "Obstacle", InfraredVal);
 
   }
 }
