@@ -1,4 +1,7 @@
-# Start your code below, you can access parameter values as normal list starting from index 1 e.g. i = parameter[1], you can write to output value as normal list starting from index 1 e.g. output[1]= 1+1
+# Start your code below, you can access parameter values
+# as normal list starting from index 1 e.g. i = parameter[1]
+# you can write to output value as normal list
+# starting from index 1 e.g. output[1]= 1+1
 
 obj = parameter[1]["data"]
 arrlgt = parameter[1]["count"]["total"] - 1
