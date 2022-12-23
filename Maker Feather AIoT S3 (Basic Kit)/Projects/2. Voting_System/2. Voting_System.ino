@@ -9,8 +9,8 @@ const char* DigitalInput = "89ad6204-e772-40ba-8b01-6360cc3c1c46";  //Replace wi
 const char* DigitalInput2 = "97019af5-1403-4859-9057-39c5746caa73"; //Replace with the deviceID of YOUR second button
 
 //Used Pins
-const int buttonPin = 14;
-const int buttonPin2 = 21;
+const int buttonPin = 14;        //Pin 14
+const int buttonPin2 = 21;       //Pin 21
 const int buzzer = 12;           //Onboard buzzer
 const int ledPin = 2;            //Onboard LED
 
