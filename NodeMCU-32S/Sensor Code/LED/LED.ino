@@ -8,7 +8,7 @@ ESP32 publish telemetry data to VOne Cloud and subcribe to execute controller (L
 const char* LEDLight = "4d785918-9050-4e91-8567-b4b96533d671"; //Replace this with YOUR deviceID for the LED
 
 //Used Pins
-const int ledPin = 23; //GPIO13. D7
+const int ledPin = 23;
 
 //Output
 
