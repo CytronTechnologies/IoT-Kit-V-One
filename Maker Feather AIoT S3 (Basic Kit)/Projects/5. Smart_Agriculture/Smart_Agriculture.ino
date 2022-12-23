@@ -23,10 +23,10 @@ const char* MoistureSensor = "abcf1c7f-b293-40dc-9fb0-add99e4e90f8";  //Replace 
 const char* WaterLevel = "345a038c-0fdc-4cd3-a60e-0060d83c32da";      //Replace this with YOUR deviceID for the water level sensor
 
 //Used Pins
-const int servoPin = 21;
-const int moisturePin = A3;
-const int depthPin = 4;
-const int buzzer = 12;
+const int servoPin = 21;         //Pin 21
+const int moisturePin = A3;      //Middle Maker Port
+const int depthPin = 4;          //Left side Maker Port
+const int buzzer = 12;           //Onboard buzzer
 
 //Output
 Servo Myservo;
