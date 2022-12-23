@@ -11,8 +11,8 @@ const char* DigitalInput2 = "97019af5-1403-4859-9057-39c5746caa73"; //Replace wi
 //Used Pins
 const int buttonPin = 14;
 const int buttonPin2 = 21;
-const int buzzer = 12;
-const int ledPin = 2;
+const int buzzer = 12;           //Onboard buzzer
+const int ledPin = 2;            //Onboard LED
 
 int count1 = 0;
 int count2 = 0;
