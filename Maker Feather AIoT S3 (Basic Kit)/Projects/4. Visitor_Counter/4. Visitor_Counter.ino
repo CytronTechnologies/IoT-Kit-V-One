@@ -13,12 +13,12 @@ const char* InfraredSensor = "756b1939-44ad-4872-8b2a-12dbd45bd9ff";  //Replace 
 const char* ServoMotor = "d33bdf13-4595-4f04-b561-0b743238f25e";      //Replace with the deviceID of YOUR servo motor
 
 //Used Pins
-const int InfraredPin1 = 4;
-const int InfraredPin2 = 42;
-const int ledPin = 2;
-const int buzzer = 12;
-const int servoPin = 21;
-const int neoPin = 46;
+const int InfraredPin1 = 4;        //Left side Maker Port
+const int InfraredPin2 = 42;       //Right side Maker Port
+const int ledPin = 2;              //Onboard LED
+const int buzzer = 12;             //Onboard buzzer
+const int servoPin = 21;           //pin 21
+const int neoPin = 46;             //onboard Neopixel
 
 unsigned long lastMillis = 0;
 volatile int count1 = 0;
