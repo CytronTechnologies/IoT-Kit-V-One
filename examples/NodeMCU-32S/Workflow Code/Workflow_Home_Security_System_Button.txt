@@ -1,0 +1,14 @@
+# Start your code below, you can access parameter values as normal list starting from index 1 e.g. i = parameter[1], you can write to output value as normal list starting from index 1 e.g. output[1]= 1+1
+
+obj = parameter[1]["data"]
+arrlgt = parameter[1]["count"]["total"] - 1
+button = obj[arrlgt]["Button1"]
+threshold = 0
+
+if int(button) > threshold:
+    msgbody='<p>There is step outside your house. Please go and check.</p><br>'
+    output[1]="[Alerts] Step Detected! "
+    output[2]=msgbody
+    output[3]=2
+
+# end your code here #
