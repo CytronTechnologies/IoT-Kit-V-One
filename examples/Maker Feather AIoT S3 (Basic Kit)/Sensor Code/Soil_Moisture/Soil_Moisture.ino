@@ -14,7 +14,7 @@ int Moisture = 0;
 const char* MoistureSensor = "ca4b26fd-9fa8-4e8b-aa7c-7a2a2d376057";          //Replace this with YOUR deviceID for the moisture sensor
 
 //Used Pins
-const int moisturePin = A3;      //Middle Maker Port
+const int moisturePin = A2;      //Middle Maker Port
 
 //input sensor
 
