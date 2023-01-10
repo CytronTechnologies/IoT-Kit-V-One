@@ -10,8 +10,8 @@ const char* ServoMotor = "d33bdf13-4595-4f04-b561-0b743238f25e";      //Replace 
 const char* InfraredSensor = "756b1939-44ad-4872-8b2a-12dbd45bd9ff";  //Replace with YOUR deviceID for the infrared sensor
 
 //Used Pins
-const int servoPin = 4;          //Pin A4
-const int InfraredPin = 42;      //Right side Maker Port
+const int servoPin = 21;          //Pin 21
+const int InfraredPin = 4;        //Left side Maker Port
 
 //Output
 Servo Myservo;
