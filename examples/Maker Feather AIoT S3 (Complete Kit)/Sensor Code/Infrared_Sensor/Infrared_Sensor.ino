@@ -8,7 +8,7 @@
 const char* InfraredSensor = "756b1939-44ad-4872-8b2a-12dbd45bd9ff";  //Replace with the deviceID of YOUR infrared sensor
 
 //Used Pins
-const int InfraredPin = 6;
+const int InfraredPin = 4;    //Left side Maker Port
 
 //input sensor
 
