@@ -1,5 +1,5 @@
 /*
-ESP32 publish telemetry data to VOne Cloud and subcribe to execute controller
+ESP32 publish telemetry data to VOne Cloud (PIR sensor)
 */
 
 #include "VOneMqttClient.h"
@@ -7,10 +7,10 @@ ESP32 publish telemetry data to VOne Cloud and subcribe to execute controller
 #define timeSeconds 3
 
 //define device id
-const char* PIRsensor = "123914bb-debc-4490-b673-470b4bc73c44";  //pir sensor
+const char* PIRsensor = "123914bb-debc-4490-b673-470b4bc73c44";       //Replace with YOUR deviceID for PIR sensor
 
 //Used Pins
-const int motionSensor = 23;
+const int motionSensor = 4;      //Left side Maker Port
 
 //input sensor
 // Timer: Auxiliary variables
