@@ -10,7 +10,7 @@ float gasValue;
 const char* MQ2sensor = "5927205f-4421-46e8-a828-0a03f443799d";        //Replace with YOUR deviceID for MQ2 sensor
 
 //Used Pins
-const int MQ2pin = 4;         //Left side Maker Port
+const int MQ2pin = A2;         //Middle Maker Port
 
 //input sensor
 
