@@ -5,10 +5,10 @@
 #include "VOneMqttClient.h"
 
 //define device id
-const char* RainSensor = "464b7d12-27ca-45c6-858a-8d619dff879b";//rain sensor
+const char* RainSensor = "464b7d12-27ca-45c6-858a-8d619dff879b";         //Replace with YOUR deviceID for rain sensor
 
 //Used Pins
-const int rainPin = 26; //
+const int rainPin = 4;       //Left side Maker Port
 
 //input sensor
 
