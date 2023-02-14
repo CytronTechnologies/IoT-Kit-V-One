@@ -1,5 +1,5 @@
 /*
-ESP32 publish telemetry data to VOne Cloud (DHT22 sensor)
+ESP32 publish telemetry data to VOne Cloud (DHT11 sensor)
 */
 
 #include "VOneMqttClient.h"
@@ -7,13 +7,13 @@ ESP32 publish telemetry data to VOne Cloud (DHT22 sensor)
 
 
 //define device id
-const char* DHT11sensor = "29099b40-50a8-457a-865f-5c120863cb15"; //dht11
+const char* DHT11sensor = "29099b40-50a8-457a-865f-5c120863cb15";         //Replace with the deviceID of YOUR DHT11 sensor
 
 //Used Pins
-const int dht11Pin = 23;
+const int dht11Pin = 4;        //Left side Maker Port
 
 //input sensor
-#define DHTTYPE DHT11 // DHT 11
+#define DHTTYPE DHT11
 DHT dht(dht11Pin, DHTTYPE);
 
 //Create an instance of VOneMqttClient
