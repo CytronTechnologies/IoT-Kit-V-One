@@ -1,5 +1,5 @@
 /*
-  ESP32 publish telemetry data to VOne Cloud and subcribe to execute controller
+  ESP32 publish telemetry data to VOne Cloud (Soil Moisture)
 */
 
 #include "VOneMqttClient.h"
@@ -11,10 +11,10 @@ int MaxMoisture = 100;
 int Moisture = 0;
 
 //define device id
-const char* MoistureSensor = "ca4b26fd-9fa8-4e8b-aa7c-7a2a2d376057"; //moisture sensor
+const char* MoistureSensor = "ca4b26fd-9fa8-4e8b-aa7c-7a2a2d376057";          //Replace this with YOUR deviceID for the moisture sensor
 
 //Used Pins
-const int moisturePin = 34;
+const int moisturePin = A2;        //Middle Maker Port
 
 //input sensor
 
