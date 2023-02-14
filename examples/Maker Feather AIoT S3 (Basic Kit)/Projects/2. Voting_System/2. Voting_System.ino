@@ -5,8 +5,8 @@
 #include "VOneMqttClient.h"
 
 //define device id
-const char* DigitalInput = "89ad6204-e772-40ba-8b01-6360cc3c1c46";  //Replace with the deviceID of YOUR first button
-const char* DigitalInput2 = "97019af5-1403-4859-9057-39c5746caa73"; //Replace with the deviceID of YOUR second button
+const char* DigitalInput = "89ad6204-e772-40ba-8b01-6360cc3c1c46";  //Replace with the deviceID of YOUR first push button
+const char* DigitalInput2 = "97019af5-1403-4859-9057-39c5746caa73"; //Replace with the deviceID of YOUR second push button
 
 //Used Pins
 const int buttonPin = 14;        //Pin 14
