@@ -5,10 +5,10 @@ ESP32 publish telemetry data to VOne Cloud and subcribe to relay
 #include "VOneMqttClient.h"
 
 //define device id
-const char* Relay = "30f2294d-e7f1-4808-ba80-fbaecbb7885c"; //relay
+const char* Relay = "30f2294d-e7f1-4808-ba80-fbaecbb7885c";         //Replace with YOUR deviceID for relay
 
 //Used Pins
-const int relayPin = 26;
+const int relayPin = 14;       //Pin 14
 
 //Output
 
