@@ -3,7 +3,7 @@
 obj = parameter[1]["data"]
 arrlgt = parameter[1]["count"]["total"] - 1
 gas = obj[arrlgt]["Gas detector"]
-threshold = 3000
+threshold = 2000
 
 if int(gas) > threshold:
     msgbody='<p>Current gas value '+gas+' is over threshold. Please open the window to provide a better ventilation.</p><br>'
