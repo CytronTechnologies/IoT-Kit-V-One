@@ -6,10 +6,10 @@ ESP32 publish telemetry data to VOne Cloud and subcribe to execute controller (s
 #include <Servo.h>
 
 //define device id
-const char* ServoMotor = "7b9ad8f7-dc0f-4979-9e0d-87a6cab8ff83"; //servo motor
+const char* ServoMotor = "7b9ad8f7-dc0f-4979-9e0d-87a6cab8ff83";        //Replace with YOUR deviceID for the servo
 
 //Used Pins
-const int servoPin = 27;
+const int servoPin = 21;      //pin 21
 
 //Output
 Servo Myservo;
