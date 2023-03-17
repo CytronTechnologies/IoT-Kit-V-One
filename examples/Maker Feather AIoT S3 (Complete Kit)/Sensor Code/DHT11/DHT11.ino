@@ -68,7 +68,7 @@ void loop() {
    
     //Publish telemetry data
     float h = dht.readHumidity();
-    float t = dht.readTemperature();
+    int t = dht.readTemperature();
 
     JSONVar payloadObject;    
     payloadObject["Humidity"] = h;
