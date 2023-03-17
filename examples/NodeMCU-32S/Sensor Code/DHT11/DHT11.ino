@@ -67,8 +67,8 @@ void loop() {
     lastMsgTime = cur;
    
     //Publish telemetry data
-    float h = dht.readHumidity();
-    float t = dht.readTemperature();
+    int h = dht.readHumidity();
+    int t = dht.readTemperature();
 
     JSONVar payloadObject;    
     payloadObject["humidity"] = h;
